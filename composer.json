@@ -1,0 +1,31 @@
+{
+    "name": "grav-plugin-loginldap",
+    "description": "Enables user authentication and login screen.",
+    "keywords": ["login", "authentication", "admin", "security"],
+    "homepage": "https://github.com/markleary/grav-plugin-loginldap",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mark Leary",
+            "email": "leary.mark@gmail.com",
+            "homepage": "http://benjamin-regler.de",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "support@example.org",
+        "issues": "https://github.com/markleary/grav-plugin-loginldap/issues",
+        "irc": "https://gitter.im/getgrav/grav",
+        "forum": "http://getgrav.org/forum",
+        "docs": "https://github.com/markleary/grav-plugin-loginldap/blob/master/README.md"
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "birke/rememberme": "1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Grav\\Plugin\\LoginLdap\\": "classes/"
+        }
+    }
+}

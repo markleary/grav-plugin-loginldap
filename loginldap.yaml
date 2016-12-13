@@ -1,0 +1,27 @@
+enabled: true
+built_in_css: true
+route: /login
+redirect_after_login:
+parent_acl: false
+protect_protected_page_media: false
+
+ldap:
+  server:
+  port: 389
+  ssl_verify: true                # require certificate to be verified
+  ssl_start_tls: false
+  username_case_sensitive: false
+  bind_type: 'anonymous'          # 'anonymous' or 'user'
+  bind_dn:
+  bind_pw:
+  user_base_dn:                   # Search base
+  user_filter: '(&(objectClass=user)(sAMAccountName=%s))'
+  attr:
+    username: 'uid'
+    fullname: 'cn'
+    email: 'mail'
+
+rememberme:
+  enabled: true
+  timeout: 604800                      # Timeout in seconds. Defaults to 1 week
+  name: grav-rememberme                # Name prefix of the session cookie

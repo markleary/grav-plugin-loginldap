@@ -1,0 +1,82 @@
+en:
+  PLUGIN_LOGIN_LDAP:
+    USERNAME: Username
+    EMAIL: Email
+    USERNAME_EMAIL: Username/Email
+    PASSWORD: Password
+    ACCESS_DENIED: Access denied...
+    LOGIN_FAILED: Login failed...
+    LOGIN_SUCCESSFUL: You have been successfully logged in.
+    BTN_LOGIN: Login
+    BTN_LOGOUT: Logout
+    SESSION: &ldquo;Remember Me&rdquo;-Session
+    REMEMBER_ME: Remember Me
+    REMEMBER_ME_HELP: Sets a persistent cookie on your browser to allow persistent-login authentication between sessions.
+    REMEMBER_ME_STOLEN_COOKIE: Someone else has used your login information to access this page! All sessions were logged out. Please log in with your credentials and check your data.
+    EXT_MISSING: PHP LDAP Extension is not installed.
+    NO_CONNECT: Unable to connect to the LDAP server.
+    NO_TLS: Unable to start TLS.
+    NO_USER_BIND: Unable to bind as "%s"
+    NO_ANON_BIND: Unable to perform anonymous binding.
+    INVALID_BIND_PARAM: Invalid value for bind_type parameter.
+    WELCOME: Welcome
+de:
+  PLUGIN_LOGIN_LDAP:
+    USERNAME: Benutzername
+    PASSWORD: Passwort
+    ACCESS_DENIED: Zugang verweigert
+    LOGIN_FAILED: Login fehlgeschlagen...
+    LOGIN_SUCCESSFUL: Du wurdest erfolgreich eingeloggt.
+    BTN_LOGIN: Anmelden
+    BTN_LOGOUT: Ausloggen
+    BTN_FORGOT: Vergessen
+    BTN_REGISTER: Registrieren
+    REMEMBER_ME: Angemeldet bleiben
+    REMEMBER_ME_HELP: "Speichert einen Cookie im Browser, welcher eine fortwährende Anmeldung sicherstellt."
+
+fr:
+  PLUGIN_LOGIN_LDAP:
+    USERNAME: "Nom d’utilisateur"
+    EMAIL: "E-mail"
+    USERNAME_EMAIL: "Nom d’utilisateur/E-mail"
+    PASSWORD: "Mot de passe"
+    ACCESS_DENIED: "Accès refusé..."
+    LOGIN_FAILED: "Échec de la connexion..."
+    LOGIN_SUCCESSFUL: "Vous vous êtes connecté avec succès."
+    BTN_LOGIN: "Connexion"
+    BTN_LOGOUT: "Déconnexion"
+    SESSION: "Session - &ldquo;Se souvenir de moi&rdquo;"
+    REMEMBER_ME: "Se souvenir de moi"
+    REMEMBER_ME_HELP: "Définit un cookie persistant sur votre navigateur autorisant l’authentification par connexion persistante entre les sessions."
+    REMEMBER_ME_STOLEN_COOKIE: "Quelqu’un d’autre a utilisé vos informations de connexion pour accéder à cette page ! Toutes les sessions ont été déconnectées. Veuillez vous connecter avec vos identifiants et vérifier vos données."
+
+hr:
+  PLUGIN_LOGIN_LDAP:
+    ACCESS_DENIED: Pristup odbijen...
+    LOGIN_FAILED: Prijava nije uspjela...
+    BTN_LOGIN: Prijava
+    BTN_LOGOUT: Odjava
+
+hu:
+  PLUGIN_LOGIN_LDAP:
+    ACCESS_DENIED: Hozzáférés megtagadva...
+    LOGIN_FAILED: Sikertelen belépés...
+    LOGIN_SUCCESSFUL: Sikeresen beléptél.
+    BTN_LOGIN: Belépés
+    BTN_LOGOUT: Kilépés
+    REMEMBER_ME: Jegyezz Meg
+    REMEMBER_ME_HELP: "Elhelyezünk egy hosszú lejáratú sütit a böngésződben, hogy belépve maradhass két munkamenet között."
+    REMEMBER_ME_STOLEN_COOKIE: "Valaki a belépési adataid felhasználásával látogatta meg ezt az oldalt! Minden munkamenetet kiléptettünk. Kérlek, jelentkezz be ismét és ellenőrizd az adataidat."
+
+ro:
+  PLUGIN_LOGIN_LDAP:
+    USERNAME:  "Nume utilizator"
+    PASSWORD: "Parolă"
+    ACCESS_DENIED: "Acces refuzat..."
+    LOGIN_FAILED: "Logare eșuată..."
+    LOGIN_SUCCESSFUL: "Ați fost logat cu succes."
+    BTN_LOGIN: "Logare"
+    BTN_LOGOUT: "Ieșire din cont "
+    REMEMBER_ME: "Ține-mă minte"
+    REMEMBER_ME_HELP: "Setează o cookie în browserul Dvs. ce permite menținerea datelor de logare între sesiuni."
+    REMEMBER_ME_STOLEN_COOKIE: "Altcineva a folosit darele Dvs de logare pentru a accesa această pagină! Toate sesiunile au fost deconectate. Vă rugăm să vă logați cu datele Dvs. și să verificați toate detaliile. "
