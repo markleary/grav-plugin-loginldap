@@ -197,7 +197,7 @@ class Controller
 
             // Build attribute array
             $ldapattr = array_values($config['attr']);
-                array_push($ldapattr, 'dn');
+            array_push($ldapattr, 'dn');
 
             // Build search filter
             $sf = str_replace('%s', $username, $config['user_filter']);
