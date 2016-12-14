@@ -219,7 +219,8 @@ class Controller
                     return false;
                 }
 
-                $this->grav['log']->debug('LDAP user ' . $ldapuser['dn'] . 'authenticated.');
+                $this->grav['log']->debug('LDAP user ' . $ldapuser['dn'] . ' authenticated.');
+
                 $dataUser= array(
                     'username' => $this->post['username'],
                     'fullname' => $ldapuser[$config['attr']['fullname']][0],
@@ -227,6 +228,16 @@ class Controller
                     'access' => array('site' => array('login' => 'true')),
                     'language' => 'en',
                 );
+
+                // Assign any additional roles
+                $rolemap = $this->grav['config']->get('plugins.loginldap.rolemap');
+                if ((is_array($rolemap)) && (isset($ldapuser[$config['attr']['groups']]))) {
+                    foreach ($rolemap as $role => $ldapgroup) {
+                        if (in_array($ldapgroup, $ldapuser[$config['attr']['groups']])) {
+                            $dataUser['access'][$role] = array('login' => 'true');
+                        }
+                    }
+                }
 
                 // Set email field if in LDAP
                 if (isset($ldapuser[$config['attr']['email']])) {

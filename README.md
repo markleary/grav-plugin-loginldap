@@ -20,8 +20,17 @@ access:
   site.login: true
 ```
 
-Users who have any of the listed ACL roles enabled will have access to the page.
-Others will be forwarded to login screen.  All users who successfully authenticate against the LDAP directory will be given the site.login role.
+Users who have any of the listed ACL roles enabled will have access to the page.  Others will be forwarded to login screen.  All users who successfully authenticate against the LDAP directory will be given the site.login role.
+
+You can define additional roles to map to LDAP groups in `loginldap.yaml`.  For example:
+
+```
+rolemap:
+  student: CN=Grad,ou=People,dc=example,dc=com
+  hqstaff: CN=hqstaff,ou=People,dc=example,dc=com
+```
+
+This would allow you to restrict access to `student.login` or `hqstaff.login` in your page headers in order to restrict access to the respective LDAP groups.
 
 ## Create Private Areas
 
@@ -31,7 +40,7 @@ Enabling the setting "Use parent access rules" (`parent_acl` in loginldap.yaml) 
 
 The login plugin can **automatically generate** a login page for you when you try to access a page that your user does not have access to.
 
-Alternatively, you can also provide a specific login route if you wish to forward users to a specific login page. To do this you need to create a copy of the `loginldap.yaml` from the plugin in your `user/config/plugins` folder and provide a specific route (or just edit the plugin setttings in the admin plugin).
+Alternatively, you can also provide a specific login route if you wish to forward users to a specific login page. To do this you need to create a copy of the `loginldap.yaml` from the plugin in your `user/config/plugins` folder and provide a specific route.
 
 ```
 route: /user-login

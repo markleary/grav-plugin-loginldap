@@ -20,6 +20,7 @@ ldap:
     username: 'uid'
     fullname: 'cn'
     email: 'mail'
+    groups: 'memberof'
 
 rememberme:
   enabled: true
