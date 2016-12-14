@@ -293,11 +293,6 @@ class LoginLdapPlugin extends Plugin
             }
         }
 
-        // User is not logged in; redirect to login page.
-        if ($this->route && !$user->authenticated) {
-            $this->grav->redirect($this->route, 302);
-        }
-
         /** @var Language $l */
         $l = $this->grav['language'];
 
