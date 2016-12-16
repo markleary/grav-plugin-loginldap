@@ -107,14 +107,18 @@ class LoginLdapPlugin extends Plugin
 
                     // If we can present the correct tokens from the cookie, we are logged in
                     $username = $rememberMe->login();
+
                     if ($username) {
                         // Load user from ldap
-                        $controller->execute();
-                    } else {
-                        // Check if the token was invalid
-                      if ($rememberMe->loginTokenWasInvalid()) {
-                          $controller->setMessage($c['language']->translate('PLUGIN_LOGIN_LDAP.REMEMBER_ME_STOLEN_COOKIE'));
-                      }
+                        $dataUser = $controller->loaduser($username);
+                        $user = new User($dataUser);
+                        $session->remembered_by_cookie = true;
+                        $session->user = $user;
+                        $this->grav['log']->debug('User ' . $username . ' logged in with RememberMe.');
+                    }
+                      // Check if the token was invalid
+                    if ($rememberMe->loginTokenWasInvalid()) {
+                        $controller->setMessage($c['language']->translate('PLUGIN_LOGIN_LDAP.REMEMBER_ME_STOLEN_COOKIE'));
                     }
                 }
             }

@@ -54,6 +54,11 @@ class Controller
     protected $rememberMe;
 
     /**
+     * @var resource
+     */
+    protected $ldap;
+
+    /**
      * @var Login
      */
     protected $login;
@@ -70,6 +75,28 @@ class Controller
         $this->post = $this->getPost($post);
 
         $this->rememberMe();
+
+        // Get LDAP config
+        $config = $this->grav['config']->get('plugins.loginldap.ldap');
+
+        // Connect to ldap server
+        $this->open($config['server'], $config['port'], $config['ssl_start_tls'], $config['ssl_verify']);
+
+        // Bind
+        if ($config['bind_type'] == 'user') {
+            $this->userbind($config['bind_dn'], $config['bind_pw']);
+        } elseif ($config['bind_type'] == 'anonymous') {
+            $this->anonbind();
+        } else {
+            throw new \RuntimeException($this->grav['language']->translate('PLUGIN_LOGIN_LDAP.INVALID_BIND_PARAM'));
+        }
+    }
+
+    function __destruct() {
+        if ($this->ldap) {
+          // Kill LDAP connection
+          @ldap_unbind($this->ldap);
+        }
     }
 
     /**
@@ -151,15 +178,7 @@ class Controller
         $this->grav['session']->invalidate()->start();
         $this->setRedirect('/');
 
-        return true;
-    }
-    /**
-     * Handle RemebmerMe LoginLdap
-     */
-    public function taskLogincookie()
-    {
-        $this->authenticate($this->post, true);
-
+        $this->grav['log']->debug('User ' . $user->get('username') . ' logged out.');
         return true;
     }
 
@@ -167,119 +186,121 @@ class Controller
      * Authenticate user.
      *
      * @param array $form Form fields.
-     * @param bool $remembered If true skip ldap authentication, using rememberme cookie
      *
      * @return bool
      */
-    protected function authenticate($form, $remembered = false)
+    protected function authenticate($form)
     {
         $authenticated = false;
 
         $user = $this->grav['user'];
 
         if (!$user->authenticated) {
-            $username = isset($form['username']) ? $form['username'] : $this->rememberMe->login();
+            //$username = isset($form['username']) ? $form['username'] : $this->rememberMe->login();
+            $username = $form['username'];
+            if (!$username) {
+              return false;
+            }
 
             // Get LDAP config
             $config = $this->grav['config']->get('plugins.loginldap.ldap');
 
-            // Connect to ldap server
-            $this->open($config['server'], $config['port'], $config['ssl_start_tls'], $config['ssl_verify']);
+            $dataUser = $this->loaduser($username);
 
-            // Bind
-            if ($config['bind_type'] == 'user') {
-                $this->userbind($config['bind_dn'], $config['bind_pw']);
-            } elseif ($config['bind_type'] == 'anonymous') {
-                $this->anonbind();
-            } else {
-                throw new \RuntimeException($this->grav['language']->translate('PLUGIN_LOGIN_LDAP.INVALID_BIND_PARAM'));
-            }
-
-            // Build attribute array
-            $ldapattr = array_values($config['attr']);
-            array_push($ldapattr, 'dn');
-
-            // Build search filter
-            $sf = str_replace('%s', $username, $config['user_filter']);
-
-            $ldapuser = $this->search($config['user_base_dn'], $sf, $ldapattr);
-
-            if ($ldapuser) {
-                // do not need to check password if using rememberme
-                if (! $remembered) {
-                    if (! @ldap_bind($this->ldap, $ldapuser['dn'], $this->post['password'])) {
-                        $this->grav['log']->debug('LDAP authentication failed for user ' . $username . '.');
-                        // User exists, bad password
-                        return false;
-                    }
+            if ($dataUser) {
+                if (! @ldap_bind($this->ldap, $dataUser['dn'], $this->post['password'])) {
+                    $this->grav['log']->debug('LDAP authentication failed for user ' . $username . '.');
+                    // User exists, bad password
+                    return false;
                 }
             } else {
                 // User does not exist
                 $this->grav['log']->debug('User ' . $username . ' not found in LDAP directory.');
-                    return false;
-                }
+                return false;
+            }
 
-                $this->grav['log']->debug('LDAP user ' . $ldapuser['dn'] . ' authenticated.');
+            $user = new User($dataUser);
+            $authenticated = true;
+            $user->authenticated = true;
 
-                $dataUser= array(
-                    'username' => $this->post['username'],
-                    'fullname' => $ldapuser[$config['attr']['fullname']][0],
-                    // Give all users site access role
-                    'access' => array('site' => array('login' => 'true')),
-                    'language' => 'en',
-                );
-
-                // Assign any additional roles
-                $rolemap = $this->grav['config']->get('plugins.loginldap.rolemap');
-                if ((is_array($rolemap)) && (isset($ldapuser[$config['attr']['groups']]))) {
-                    foreach ($rolemap as $role => $ldapgroup) {
-                        if (in_array($ldapgroup, $ldapuser[$config['attr']['groups']])) {
-                            $dataUser['access'][$role] = array('login' => 'true');
-                        }
-                    }
-                }
-
-                // Set email field if in LDAP
-                if (isset($ldapuser[$config['attr']['email']])) {
-                    $dataUser['email'] = $ldapuser[$config['attr']['email']][0];
-                }
-
-                $user = new User($dataUser);
-                $authenticated = true;
-                $user->authenticated = true;
-
-                // Authorize against user ACL
-                $user_authorized = $user->authorize('site.login');
-
-                if ($user_authorized) {
-                    if ($remembered) {
-                        $session->remember_me = $this->rememberMe;
-                    }
-                    $this->grav['session']->user = $user;
-
-                    unset($this->grav['user']);
-                    $this->grav['user'] = $user;
-
-                    // If the user wants to be remembered, create Rememberme cookie
-                    if (!empty($form['rememberme'])) {
-                        $this->rememberMe->createCookie($form['username']);
-                    } else {
-                        $this->rememberMe->clearCookie();
-                        $this->rememberMe->getStorage()->cleanAllTriplets($user->get('username'));
-                    }
-              }
-        } else {
             // Authorize against user ACL
             $user_authorized = $user->authorize('site.login');
+
+            if ($user_authorized) {
+                $this->grav['session']->user = $user;
+
+                unset($this->grav['user']);
+                $this->grav['user'] = $user;
+
+                $this->grav['log']->debug('User ' . $username . ' logged in.');
+
+                // If the user wants to be remembered, create Rememberme cookie
+                if (!empty($form['rememberme'])) {
+                    $this->grav['log']->debug('RememberMe cookie set for ' . $form['username']);
+                    $this->rememberMe->createCookie($form['username']);
+                } else {
+                    $this->rememberMe->clearCookie();
+                    $this->rememberMe->getStorage()->cleanAllTriplets($user->get('username'));
+                }
+
+            }
         }
+
         // Authorize against user ACL
         $user_authorized = $user->authorize('site.login');
         $user->authenticated = ($user->authenticated && $user_authorized);
 
-        // Kill LDAP connection
-        @ldap_unbind($this->ldap);
-
         return $user->authenticated;
+    }
+
+    public function loaduser($username = null) {
+
+        if (!$username) {
+          return false;
+        }
+
+        // Get LDAP config
+        $config = $this->grav['config']->get('plugins.loginldap.ldap');
+
+        // Build attribute array
+        $ldapattr = array_values($config['attr']);
+        array_push($ldapattr, 'dn');
+
+        // Build search filter
+        $sf = str_replace('%s', $username, $config['user_filter']);
+
+        $ldapuser = $this->search($config['user_base_dn'], $sf, $ldapattr);
+
+        if (!$ldapuser) {
+            // User does not exist
+            return false;
+        }
+
+        $dataUser= array(
+            'username' => $username,
+            'dn' => $ldapuser['dn'],
+            'fullname' => $ldapuser[$config['attr']['fullname']][0],
+            // Give all users site access role
+            'access' => array('site' => array('login' => 'true')),
+            'language' => 'en',
+        );
+
+        // Assign any additional roles
+        $rolemap = $this->grav['config']->get('plugins.loginldap.rolemap');
+        if ((is_array($rolemap)) && (isset($ldapuser[$config['attr']['groups']]))) {
+            foreach ($rolemap as $role => $ldapgroup) {
+                if (in_array($ldapgroup, $ldapuser[$config['attr']['groups']])) {
+                    $dataUser['access'][$role] = array('login' => 'true');
+                }
+            }
+        }
+
+        // Set email field if in LDAP
+        if (isset($ldapuser[$config['attr']['email']])) {
+            $dataUser['email'] = $ldapuser[$config['attr']['email']][0];
+        }
+
+        return $dataUser;
     }
 
     /**

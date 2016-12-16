@@ -7,22 +7,22 @@ namespace Composer\Autoload;
 class ComposerStaticIniteed5e5cf0aa1e2139f2db7445511e366
 {
     public static $prefixLengthsPsr4 = array (
-        'G' => 
+        'G' =>
         array (
-            'Grav\\Plugin\\Login\\' => 18,
+            'Grav\\Plugin\\LoginLdap\\' => 18,
         ),
-        'B' => 
+        'B' =>
         array (
             'Birke\\' => 6,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Grav\\Plugin\\Login\\' => 
+        'Grav\\Plugin\\Login\\' =>
         array (
             0 => __DIR__ . '/../..' . '/classes',
         ),
-        'Birke\\' => 
+        'Birke\\' =>
         array (
             0 => __DIR__ . '/..' . '/birke/rememberme/src',
         ),

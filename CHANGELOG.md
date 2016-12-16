@@ -1,3 +1,8 @@
+# v0.3.0
+## 12/16/2016
+
+  * Refactored some code to fix rememberme functionality.
+
 # v0.2.0
 ## 12/14/2016
 
