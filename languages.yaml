@@ -49,7 +49,14 @@ fr:
     REMEMBER_ME: "Se souvenir de moi"
     REMEMBER_ME_HELP: "Définit un cookie persistant sur votre navigateur autorisant l’authentification par connexion persistante entre les sessions."
     REMEMBER_ME_STOLEN_COOKIE: "Quelqu’un d’autre a utilisé vos informations de connexion pour accéder à cette page ! Toutes les sessions ont été déconnectées. Veuillez vous connecter avec vos identifiants et vérifier vos données."
-
+    EXT_MISSING: PHP LDAP "L’extension n’est pas installée."
+    NO_CONNECT: "Impossible de se connecter au serveur LDAP."
+    NO_TLS: "Impossible de démarrer le TLS."
+    NO_USER_BIND: "Impossible de lier comme &ldquo;%s&ldquo;"
+    NO_ANON_BIND: "Impossible d’exécuter une liaison anonyme."
+    INVALID_BIND_PARAM: "Valeur du paramètre bind_typenon non valide."
+    WELCOME: "Bienvenue"
+    
 hr:
   PLUGIN_LOGIN_LDAP:
     ACCESS_DENIED: Pristup odbijen...
