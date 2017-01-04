@@ -3,6 +3,7 @@
 
 1. [](#new)
    * FR language support.
+
 # v0.3.0
 ## 12/16/2016
 
