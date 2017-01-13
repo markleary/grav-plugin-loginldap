@@ -1,6 +1,6 @@
 name: LoginLdap
-version: 0.3.0
-testing: true
+version: 0.3.1
+testing: false
 description: Enables user authentication via LDAP.
 icon: sign-in
 author:
