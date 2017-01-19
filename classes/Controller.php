@@ -369,8 +369,7 @@ class Controller
 
             // Set cookie with correct base path of Grav install
             $cookie = new Cookie();
-            //$cookie->setPath($this->grav['base_url_relative']);
-	    $cookie->setPath('/');
+            $cookie->setPath($this->grav['base_url_relative'] ?: '/');
             $this->rememberMe->setCookie($cookie);
         }
 
