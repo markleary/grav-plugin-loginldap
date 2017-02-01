@@ -8,7 +8,7 @@ protect_protected_page_media: false
 ldap:
   server:
   port: 389
-  ssl_verify: true                # require certificate to be verified
+  ssl_verify: false               # require certificate to be verified
   ssl_start_tls: false
   username_case_sensitive: false
   bind_type: 'anonymous'          # 'anonymous' or 'user'
