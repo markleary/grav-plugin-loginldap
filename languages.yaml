@@ -89,7 +89,7 @@ ro:
     REMEMBER_ME_STOLEN_COOKIE: "Altcineva a folosit darele Dvs de logare pentru a accesa această pagină! Toate sesiunile au fost deconectate. Vă rugăm să vă logați cu datele Dvs. și să verificați toate detaliile. "
 en:
   PLUGIN_LOGIN_LDAP:
-    USERNAME: Uživatelské jmén
+    USERNAME: Uživatelské jméno
     EMAIL: E-mailová adresa
     USERNAME_EMAIL: Uživatelské jméno/E-mailová adresa
     PASSWORD: Heslo
@@ -98,10 +98,10 @@ en:
     LOGIN_SUCCESSFUL: Byl jste úspěšně přihlášen.
     BTN_LOGIN: Přihlásit
     BTN_LOGOUT: Odhlásit
-    SESSION: Sezení &ldquo;Zapamatovat si mě&rdquo;
+    SESSION: Relace &ldquo;Zapamatovat si mě&rdquo;
     REMEMBER_ME: Zapamatovat si mě
     REMEMBER_ME_HELP: Nastaví trvalou cookie ve vašem prohlížeči umožňující trvalé přihlášení.
-    REMEMBER_ME_STOLEN_COOKIE: Někdo jiný použil vaše přihlašovací údaje k získání přístupu k této stránce. Všechna sezení byla odhlášena. Prosím, přihlešte se s vašimi údaji a zkontrolujte vaše data.
+    REMEMBER_ME_STOLEN_COOKIE: Někdo jiný použil vaše přihlašovací údaje k získání přístupu k této stránce. Všechna sezení byla odhlášena. Prosím, přihlašte se s vašimi údaji a zkontrolujte vaše uživatelské údaje.
     EXT_MISSING: Není nainstalováno rozšíření PHP LDAP.
     NO_CONNECT: Nelze se připojit k LDAP serveru.
     NO_TLS: Nelze spustit TLS.
