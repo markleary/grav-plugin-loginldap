@@ -87,3 +87,25 @@ ro:
     REMEMBER_ME: "Ține-mă minte"
     REMEMBER_ME_HELP: "Setează o cookie în browserul Dvs. ce permite menținerea datelor de logare între sesiuni."
     REMEMBER_ME_STOLEN_COOKIE: "Altcineva a folosit darele Dvs de logare pentru a accesa această pagină! Toate sesiunile au fost deconectate. Vă rugăm să vă logați cu datele Dvs. și să verificați toate detaliile. "
+en:
+  PLUGIN_LOGIN_LDAP:
+    USERNAME: Uživatelské jméno
+    EMAIL: E-mailová adresa
+    USERNAME_EMAIL: Uživatelské jméno/E-mailová adresa
+    PASSWORD: Heslo
+    ACCESS_DENIED: Přístup odepřen...
+    LOGIN_FAILED: Chyba přihlášení...
+    LOGIN_SUCCESSFUL: Byl jste úspěšně přihlášen.
+    BTN_LOGIN: Přihlásit
+    BTN_LOGOUT: Odhlásit
+    SESSION: Relace &ldquo;Zapamatovat si mě&rdquo;
+    REMEMBER_ME: Zapamatovat si mě
+    REMEMBER_ME_HELP: Nastaví trvalou cookie ve vašem prohlížeči umožňující trvalé přihlášení.
+    REMEMBER_ME_STOLEN_COOKIE: Někdo jiný použil vaše přihlašovací údaje k získání přístupu k této stránce. Všechna sezení byla odhlášena. Prosím, přihlašte se s vašimi údaji a zkontrolujte vaše uživatelské údaje.
+    EXT_MISSING: Není nainstalováno rozšíření PHP LDAP.
+    NO_CONNECT: Nelze se připojit k LDAP serveru.
+    NO_TLS: Nelze spustit TLS.
+    NO_USER_BIND: Nelze se připojit jako "%s"
+    NO_ANON_BIND: Nelze se připojit jako anonymní uživatel.
+    INVALID_BIND_PARAM: Neznámá hodnota pro parametr bind_type.
+    WELCOME: Vítejte
