@@ -6,23 +6,27 @@ namespace Composer\Autoload;
 
 class ComposerStaticIniteed5e5cf0aa1e2139f2db7445511e366
 {
+    public static $files = array (
+        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
-        'G' =>
+        'G' => 
         array (
-            'Grav\\Plugin\\LoginLdap\\' => 18,
+            'Grav\\Plugin\\LoginLdap\\' => 22,
         ),
-        'B' =>
+        'B' => 
         array (
             'Birke\\' => 6,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Grav\\Plugin\\Login\\' =>
+        'Grav\\Plugin\\LoginLdap\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes',
         ),
-        'Birke\\' =>
+        'Birke\\' => 
         array (
             0 => __DIR__ . '/..' . '/birke/rememberme/src',
         ),
