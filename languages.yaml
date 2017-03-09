@@ -87,7 +87,7 @@ ro:
     REMEMBER_ME: "Ține-mă minte"
     REMEMBER_ME_HELP: "Setează o cookie în browserul Dvs. ce permite menținerea datelor de logare între sesiuni."
     REMEMBER_ME_STOLEN_COOKIE: "Altcineva a folosit darele Dvs de logare pentru a accesa această pagină! Toate sesiunile au fost deconectate. Vă rugăm să vă logați cu datele Dvs. și să verificați toate detaliile. "
-en:
+cs:
   PLUGIN_LOGIN_LDAP:
     USERNAME: Uživatelské jméno
     EMAIL: E-mailová adresa
