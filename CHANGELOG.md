@@ -1,3 +1,11 @@
+# v0.3.3
+## 3/9/2017
+
+1. [](#bugfix)
+  * Composer update.
+2. [](#bugfix)
+  * Language update.
+
 # v0.3.2
 ## 3/6/2017
 
