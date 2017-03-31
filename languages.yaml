@@ -91,7 +91,7 @@ cs:
   PLUGIN_LOGIN_LDAP:
     USERNAME: Uživatelské jméno
     EMAIL: E-mailová adresa
-    USERNAME_EMAIL: Uživatelské jméno/E-mailová adresa
+    USERNAME_EMAIL: Uživ. jméno/E-mail. adresa
     PASSWORD: Heslo
     ACCESS_DENIED: Přístup odepřen...
     LOGIN_FAILED: Chyba přihlášení...
