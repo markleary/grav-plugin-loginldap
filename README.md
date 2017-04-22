@@ -27,10 +27,13 @@ You can define additional roles to map to LDAP groups in `loginldap.yaml`.  For 
 ```
 rolemap:
   student: CN=Grad,ou=People,dc=example,dc=com
-  hqstaff: CN=hqstaff,ou=People,dc=example,dc=com
+  hqstaff:
+    login: CN=hqstaff,ou=People,dc=example,dc=com
+    super: CN=hqadmin,ou=People,dc=example,dc=com
 ```
 
-This would allow you to restrict access to `student.login` or `hqstaff.login` in your page headers in order to restrict access to the respective LDAP groups.
+This would allow you to restrict access to `student.login`, `hqstaff.login`, or `hqstaff.super` in your page headers in order to restrict access to the respective LDAP groups.
+*Note: In the example above, `student.login` is infered, but `hqstaff.login` must be explicitly defined to use it.*
 
 ## Create Private Areas
 

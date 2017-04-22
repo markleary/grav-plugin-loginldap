@@ -288,9 +288,25 @@ class Controller
         // Assign any additional roles
         $rolemap = $this->grav['config']->get('plugins.loginldap.rolemap');
         if ((is_array($rolemap)) && (isset($ldapuser[$config['attr']['groups']]))) {
-            foreach ($rolemap as $role => $ldapgroup) {
-                if (in_array($ldapgroup, $ldapuser[$config['attr']['groups']])) {
-                    $dataUser['access'][$role] = array('login' => 'true');
+            foreach ($rolemap as $role => $value) {
+                if (is_string($value)) {
+                    if (in_array($value, $ldapuser[$config['attr']['groups']])) {
+                        $dataUser['access'][$role] = array('login' => 'true');
+                    }
+                } elseif (is_array($value)) {
+                    $accessGroup = null;
+                    foreach($value as $roleChild => $ldapgroup) {
+                        if (in_array($ldapgroup, $ldapuser[$config['attr']['groups']])) {
+                            if (!isset($accessGroup)) {
+                                $accessGroup = array($roleChild => 'true');
+                            } else {
+                                $accessGroup[$roleChild] = 'true';
+                            }
+                        }
+                    }
+
+                    if (isset($accessGroup))
+                        $dataUser['access'][$role] = $accessGroup;
                 }
             }
         }
