@@ -298,10 +298,9 @@ class Controller
                     foreach($value as $roleChild => $ldapgroup) {
                         if (in_array($ldapgroup, $ldapuser[$config['attr']['groups']])) {
                             if (!isset($accessGroup)) {
-                                $accessGroup = array($roleChild => 'true');
-                            } else {
-                                $accessGroup[$roleChild] = 'true';
+                                $accessGroup = array('login' => 'true');
                             }
+                            $accessGroup[$roleChild] = 'true';
                         }
                     }
 
