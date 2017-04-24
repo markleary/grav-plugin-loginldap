@@ -34,7 +34,7 @@ rolemap:
 
 This would allow you to restrict access to `student.login`, `hqstaff.login`, or `hqstaff.super` in your page headers in order to restrict access to the respective LDAP groups.
 
-**Note: In the example above, `student.login` is infered, but `hqstaff.login` must be explicitly defined to use it.**
+**Note: In the example above, `student.login` is implied, but `hqstaff.login` must be explicitly defined to grant only that level of access. Meeting the requirements for any group under `hqstaff.*` will also grant that user `hqstaff.login`.**
 
 ## Create Private Areas
 
