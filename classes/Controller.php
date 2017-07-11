@@ -291,6 +291,7 @@ class Controller
             foreach ($rolemap as $role => $ldapgroup) {
                 if (in_array($ldapgroup, $ldapuser[$config['attr']['groups']])) {
                     $dataUser['access'][$role] = array('login' => 'true');
+                    $dataUser['groups'][] = $role;
                 }
             }
         }
