@@ -20,6 +20,10 @@ en:
     NO_ANON_BIND: Unable to perform anonymous binding.
     INVALID_BIND_PARAM: Invalid value for bind_type parameter.
     WELCOME: Welcome
+    USERLOGIN: User Login
+    PAGERESTRICTED: This page is restricted...
+    USERNAME_PLACEHOLDER: Username
+    PASSWORD_PLACEHOLDER: Password
 de:
   PLUGIN_LOGIN_LDAP:
     USERNAME: Benutzername
@@ -109,3 +113,7 @@ cs:
     NO_ANON_BIND: Nelze se připojit jako anonymní uživatel.
     INVALID_BIND_PARAM: Neznámá hodnota pro parametr bind_type.
     WELCOME: Vítejte
+    USERLOGIN: Přihlášení
+    PAGERESTRICTED: Zobrazení stránky je podmíněno přihlášením...
+    USERNAME_PLACEHOLDER: Už. jméno
+    PASSWORD_PLACEHOLDER: Heslo

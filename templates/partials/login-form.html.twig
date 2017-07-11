@@ -9,7 +9,8 @@
             <a class="button logout" href="{{ uri.addNonce(base_url_relative ~ uri.path ~ '/task' ~ config.system.param_sep ~ 'login.logout', 'logout-form', 'logout-nonce') }}">{{ 'PLUGIN_LOGIN_LDAP.BTN_LOGOUT'|t }}</a>
 
         {% else %}
-            {{ content|raw }}
+    		<h1>{{ 'PLUGIN_LOGIN_LDAP.USERLOGIN'|t }}</h1>
+            <p>{{ 'PLUGIN_LOGIN_LDAP.PAGERESTRICTED'|t }}</p>
 
             <form method="post" action="{{ base_url_relative ~ uri.path }}">
                 {% if grav.twig.plugins_hooked_loginPage %}
